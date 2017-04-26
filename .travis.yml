@@ -2,10 +2,9 @@
 language: cpp
 # Compiler selection
 compiler:
-  - clang
   - gcc
 # Build steps
 script:
   - mkdir build
   - cd build
-  - cmake .. && make
+  - cmake .. -G"CodeBlocks - Unix Makefiles" && make
