@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-TEST(Hello,World)
+TEST(robot,first_test)
 {
-	FAIL();
+	
 }

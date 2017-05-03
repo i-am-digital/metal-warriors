@@ -4,5 +4,5 @@ include(${gtest_SOURCE_DIR}/cmake/internal_utils.cmake)
 include_directories(SYSTEM ${gtest_SOURCE_DIR}/include)
 
 add_executable(metal-warriors.tests
-		firsttest.cpp)
+		robottests.cpp)
 target_link_libraries(metal-warriors.tests metal-source gtest gtest_main)
