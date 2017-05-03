@@ -1,0 +1,6 @@
+#include <gtest/gtest.h>
+
+TEST(Hello,World)
+{
+	FAIL();
+}
