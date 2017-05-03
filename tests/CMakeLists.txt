@@ -5,4 +5,4 @@ include_directories(SYSTEM ${gtest_SOURCE_DIR}/include)
 
 add_executable(metal-warriors.tests
 		firsttest.cpp)
-target_link_libraries(metal-warriors.tests gtest gtest_main)
+target_link_libraries(metal-warriors.tests metal-source gtest gtest_main)
