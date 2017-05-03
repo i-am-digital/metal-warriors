@@ -5,7 +5,4 @@ compiler:
   - gcc
 # Build steps
 script:
-  - mkdir build
-  - cd build
-  - cmake .. -G"CodeBlocks - Unix Makefiles" && make && ls
-  - cd source && ls
+  - ./travis-build.sh
