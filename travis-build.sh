@@ -3,5 +3,5 @@
 mkdir build
 cd build
 cmake .. -G"CodeBlocks - Unix Makefiles" && make
-cd source
-./metal-warriors
+cd tests
+./metal-warriors.tests
