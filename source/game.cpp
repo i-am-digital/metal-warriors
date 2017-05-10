@@ -16,27 +16,38 @@ void game_main()
 
 	if (window != nullptr)
 	{
-		bool isRunning = true;
-		while(isRunning)
+		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1,
+			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+		if (renderer != nullptr)
 		{
-			SDL_Event event;
-			while(SDL_PollEvent(&event))
+			bool isRunning = true;
+			while (isRunning)
 			{
-				switch(event.type)
+				SDL_Event event;
+				while (SDL_PollEvent(&event))
 				{
-				case SDL_QUIT:
-					isRunning = false;
-					break;
-				case SDL_KEYDOWN:
-					if (event.key.keysym.sym == SDLK_ESCAPE)
+					switch (event.type)
 					{
+					case SDL_QUIT:
 						isRunning = false;
+						break;
+					case SDL_KEYDOWN:
+						if (event.key.keysym.sym == SDLK_ESCAPE)
+						{
+							isRunning = false;
+						}
+						break;
+					default:
+						break;
 					}
-					break;
-				default:
-					break;
 				}
+
+				SDL_RenderClear(renderer);
+				SDL_RenderPresent(renderer);
 			}
+
+			SDL_DestroyRenderer(renderer);
 		}
 
 		SDL_DestroyWindow(window);
