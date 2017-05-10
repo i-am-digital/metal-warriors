@@ -1,7 +1,6 @@
 #include "game.h"
 #include <iostream>
 #include <SDL.h>
-#include "Windows.h"
 
 void game_main()
 {
@@ -17,7 +16,28 @@ void game_main()
 
 	if (window != nullptr)
 	{
-		Sleep(5000);
+		bool isRunning = true;
+		while(isRunning)
+		{
+			SDL_Event event;
+			while(SDL_PollEvent(&event))
+			{
+				switch(event.type)
+				{
+				case SDL_QUIT:
+					isRunning = false;
+					break;
+				case SDL_KEYDOWN:
+					if (event.key.keysym.sym == SDLK_ESCAPE)
+					{
+						isRunning = false;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}
 
 		SDL_DestroyWindow(window);
 	}
