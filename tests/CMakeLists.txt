@@ -1,5 +1,5 @@
 include(${gtest_SOURCE_DIR}/cmake/internal_utils.cmake)
-#configure_compiler_and_linker()
+config_compiler_and_linker()
 
 include_directories(SYSTEM ${gtest_SOURCE_DIR}/include)
 
