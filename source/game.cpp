@@ -1,3 +1,4 @@
+#include "renderer.h"
 #include "window.h"
 #include "game.h"
 #include "context.h"
@@ -14,21 +15,17 @@ void game_main()
 	{
 		Context sdlContext;
 		Window sdlWindow;
-		//Renderer sdlRenderer(sdlWindow);
+		Renderer sdlRenderer(sdlWindow);
 
 		std::cout << "Hello from game" << std::endl;
 
 		
-			SDL_Renderer* renderer = SDL_CreateRenderer(sdlWindow.getWindow(), -1,
-				SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
-			if (renderer != nullptr)
-			{
+			
 
 				SDL_Surface* tankSprite = SDL_LoadBMP("tank-sprite.bmp");
 				if (tankSprite != nullptr)
 				{
-					SDL_Texture* tankTexture = SDL_CreateTextureFromSurface(renderer, tankSprite);
+					SDL_Texture* tankTexture = SDL_CreateTextureFromSurface(sdlRenderer.getRenderer(), tankSprite);
 					if (tankTexture != nullptr)
 					{
 						bool isRunning = true;
@@ -53,7 +50,7 @@ void game_main()
 								}
 							}
 
-							SDL_RenderClear(renderer);
+							sdlRenderer.clear();
 
 							SDL_Rect tankLocation;
 							tankLocation.x = 10;
@@ -61,8 +58,8 @@ void game_main()
 							tankLocation.w = 100;
 							tankLocation.h = 100;
 
-							SDL_RenderCopy(renderer, tankTexture, nullptr, &tankLocation);
-							SDL_RenderPresent(renderer);
+							SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture, nullptr, &tankLocation);
+							sdlRenderer.present();
 						}
 						SDL_DestroyTexture(tankTexture);
 					}
@@ -74,8 +71,7 @@ void game_main()
 				}
 
 
-				SDL_DestroyRenderer(renderer);
-			}
+				
 
 
 		std::cout << "Bye from game" << std::endl;
