@@ -24,6 +24,10 @@ public:
 	{
 		SDL_DestroyRenderer(renderer);
 	}
+	
+	Renderer(Renderer const&) = delete;
+	Renderer& operator=(Renderer const&) = delete;
+
 	SDL_Renderer* getRenderer()
 	{
 		return renderer;

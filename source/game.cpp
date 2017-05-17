@@ -1,3 +1,4 @@
+#include "texture.h"
 #include "surface.h"
 #include "renderer.h"
 #include "window.h"
@@ -7,6 +8,7 @@
 #include <SDL.h>
 #include <exception>
 
+
 void game_main()
 {
 	try
@@ -15,12 +17,11 @@ void game_main()
 		Window sdlWindow;
 		Renderer sdlRenderer(sdlWindow);
 		Surface tankSurface("tank-sprite.bmp");
+		Texture tankTexture(sdlRenderer, tankSurface);
 
 		std::cout << "Hello from game" << std::endl;
 
-			SDL_Texture* tankTexture = SDL_CreateTextureFromSurface(sdlRenderer.getRenderer(), tankSurface.getSurface());
-			if (tankTexture != nullptr)
-			{
+
 				bool isRunning = true;
 				while (isRunning)
 				{
@@ -51,11 +52,10 @@ void game_main()
 					tankLocation.w = 100;
 					tankLocation.h = 100;
 
-					SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture, nullptr, &tankLocation);
+					SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture.getTexture(), nullptr, &tankLocation);
 					sdlRenderer.present();
 				}
-				SDL_DestroyTexture(tankTexture);
-			}
+
 
 		std::cout << "Bye from game" << std::endl;
 	}
