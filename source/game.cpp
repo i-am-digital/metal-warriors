@@ -1,23 +1,25 @@
+#include "window.h"
 #include "game.h"
 #include "context.h"
 #include <iostream>
 #include <SDL.h>
 #include <exception>
 
+
+
+
 void game_main()
 {
 	try
 	{
 		Context sdlContext;
+		Window sdlWindow;
+		//Renderer sdlRenderer(sdlWindow);
 
 		std::cout << "Hello from game" << std::endl;
 
-		SDL_Window* window = SDL_CreateWindow("Metal Warriors",
-			10, 100, 640, 480, SDL_WINDOW_SHOWN);
-
-		if (window != nullptr)
-		{
-			SDL_Renderer* renderer = SDL_CreateRenderer(window, -1,
+		
+			SDL_Renderer* renderer = SDL_CreateRenderer(sdlWindow.getWindow(), -1,
 				SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 			if (renderer != nullptr)
@@ -75,14 +77,11 @@ void game_main()
 				SDL_DestroyRenderer(renderer);
 			}
 
-			SDL_DestroyWindow(window);
-		}
-
 
 		std::cout << "Bye from game" << std::endl;
 
 	}
-	catch(std::exception const& gameException)
+	catch(std::exception const& )
 	{
 		std::cout << "Something went wrong :(" << std::endl;
 	}
