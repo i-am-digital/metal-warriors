@@ -1,3 +1,4 @@
+#include "surface.h"
 #include "renderer.h"
 #include "window.h"
 #include "game.h"
@@ -6,9 +7,6 @@
 #include <SDL.h>
 #include <exception>
 
-
-
-
 void game_main()
 {
 	try
@@ -16,68 +14,52 @@ void game_main()
 		Context sdlContext;
 		Window sdlWindow;
 		Renderer sdlRenderer(sdlWindow);
+		Surface tankSurface("tank-sprite.bmp");
 
 		std::cout << "Hello from game" << std::endl;
 
-		
-			
-
-				SDL_Surface* tankSprite = SDL_LoadBMP("tank-sprite.bmp");
-				if (tankSprite != nullptr)
+			SDL_Texture* tankTexture = SDL_CreateTextureFromSurface(sdlRenderer.getRenderer(), tankSurface.getSurface());
+			if (tankTexture != nullptr)
+			{
+				bool isRunning = true;
+				while (isRunning)
 				{
-					SDL_Texture* tankTexture = SDL_CreateTextureFromSurface(sdlRenderer.getRenderer(), tankSprite);
-					if (tankTexture != nullptr)
+					SDL_Event event;
+					while (SDL_PollEvent(&event))
 					{
-						bool isRunning = true;
-						while (isRunning)
+						switch (event.type)
 						{
-							SDL_Event event;
-							while (SDL_PollEvent(&event))
+						case SDL_QUIT:
+							isRunning = false;
+							break;
+						case SDL_KEYDOWN:
+							if (event.key.keysym.sym == SDLK_ESCAPE)
 							{
-								switch (event.type)
-								{
-								case SDL_QUIT:
-									isRunning = false;
-									break;
-								case SDL_KEYDOWN:
-									if (event.key.keysym.sym == SDLK_ESCAPE)
-									{
-										isRunning = false;
-									}
-									break;
-								default:
-									break;
-								}
+								isRunning = false;
 							}
-
-							sdlRenderer.clear();
-
-							SDL_Rect tankLocation;
-							tankLocation.x = 10;
-							tankLocation.y = 20;
-							tankLocation.w = 100;
-							tankLocation.h = 100;
-
-							SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture, nullptr, &tankLocation);
-							sdlRenderer.present();
+							break;
+						default:
+							break;
 						}
-						SDL_DestroyTexture(tankTexture);
 					}
-					SDL_FreeSurface(tankSprite);
+
+					sdlRenderer.clear();
+
+					SDL_Rect tankLocation;
+					tankLocation.x = 10;
+					tankLocation.y = 20;
+					tankLocation.w = 100;
+					tankLocation.h = 100;
+
+					SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture, nullptr, &tankLocation);
+					sdlRenderer.present();
 				}
-				else
-				{
-					std::cout << "Unable to load tank sprite" << std::endl;
-				}
-
-
-				
-
+				SDL_DestroyTexture(tankTexture);
+			}
 
 		std::cout << "Bye from game" << std::endl;
-
 	}
-	catch(std::exception const& )
+	catch (std::exception const&)
 	{
 		std::cout << "Something went wrong :(" << std::endl;
 	}
