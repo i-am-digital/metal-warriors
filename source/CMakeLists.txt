@@ -12,3 +12,5 @@ endif()
 
 add_executable(metal-warriors main.cpp)
 target_link_libraries(metal-warriors metal-source)
+
+file(COPY images/tank-sprite.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")
