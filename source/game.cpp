@@ -1,58 +1,66 @@
+#include "texture.h"
+#include "surface.h"
+#include "renderer.h"
+#include "window.h"
 #include "game.h"
+#include "context.h"
 #include <iostream>
 #include <SDL.h>
+#include <exception>
+
 
 void game_main()
 {
-	std::cout << "Hello from game" << std::endl;
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
+	try
 	{
-		std::cout << "Unable to initialise SDL" << std::endl;
-		return;
-	}
+		Context sdlContext;
+		Window sdlWindow;
+		Renderer sdlRenderer(sdlWindow);
+		Surface tankSurface("tank-sprite.bmp");
+		Texture tankTexture(sdlRenderer, tankSurface);
 
-	SDL_Window* window = SDL_CreateWindow("Metal Warriors",
-		10, 100, 640, 480, SDL_WINDOW_SHOWN);
+		std::cout << "Hello from game" << std::endl;
 
-	if (window != nullptr)
-	{
-		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1,
-			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-		if (renderer != nullptr)
-		{
-			bool isRunning = true;
-			while (isRunning)
-			{
-				SDL_Event event;
-				while (SDL_PollEvent(&event))
+				bool isRunning = true;
+				while (isRunning)
 				{
-					switch (event.type)
+					SDL_Event event;
+					while (SDL_PollEvent(&event))
 					{
-					case SDL_QUIT:
-						isRunning = false;
-						break;
-					case SDL_KEYDOWN:
-						if (event.key.keysym.sym == SDLK_ESCAPE)
+						switch (event.type)
 						{
+						case SDL_QUIT:
 							isRunning = false;
+							break;
+						case SDL_KEYDOWN:
+							if (event.key.keysym.sym == SDLK_ESCAPE)
+							{
+								isRunning = false;
+							}
+							break;
+						default:
+							break;
 						}
-						break;
-					default:
-						break;
 					}
+
+					sdlRenderer.clear();
+
+					SDL_Rect tankLocation;
+					tankLocation.x = 10;
+					tankLocation.y = 20;
+					tankLocation.w = 100;
+					tankLocation.h = 100;
+
+					SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture.getTexture(), nullptr, &tankLocation);
+					sdlRenderer.present();
 				}
 
-				SDL_RenderClear(renderer);
-				SDL_RenderPresent(renderer);
-			}
 
-			SDL_DestroyRenderer(renderer);
-		}
-
-		SDL_DestroyWindow(window);
+		std::cout << "Bye from game" << std::endl;
 	}
-
-	SDL_Quit();
-
+	catch (std::exception const&)
+	{
+		std::cout << "Something went wrong :(" << std::endl;
+	}
 }
