@@ -6,6 +6,7 @@ language: cpp
 # Compiler selection
 compiler:
   - gcc
+env: COMPILER=g++-6
 # Build steps
 script:
   - sudo apt-get update
