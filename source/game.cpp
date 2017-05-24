@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <exception>
 
-void game_main()
+void game_main(std::string const& applicationPath)
 {
 	try
 	{

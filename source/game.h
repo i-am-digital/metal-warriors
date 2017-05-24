@@ -1,7 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-void game_main();
+#include <string>
+
+void game_main(std::string const& applicationPath);
 
 #endif // !GAME_H
 
