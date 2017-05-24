@@ -1,4 +1,5 @@
 #include "robot.h"
+#include <cmath>
 
 bool robot::moveForward()
 {
@@ -55,12 +56,16 @@ void robot::service()
 {
 	if (isForwardKeyDown)
 	{
-		y = y - 1;
+		double radians = (angle * 2 * 3.142) / 360;
+		x = x + sin(radians);
+		y = y - cos(radians);
 	}
 
 	if (isBackwardKeyDown) 
 	{
-		y = y + 1;
+		double radians = (angle * 2 * 3.142) / 360;
+		x = x - sin(radians);
+		y = y + cos(radians);
 	}
 	
 	if (isClockwiseKeyDown)

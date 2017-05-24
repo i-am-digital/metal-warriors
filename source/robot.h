@@ -4,8 +4,8 @@
 class robot
 {
 private:
-	int x{ 50 };
-	int y{ 100 };
+	double x{ 50 };
+	double y{ 100 };
 	double angle{ 0 };
 	bool isForwardKeyDown{ false };
 	bool isBackwardKeyDown{ false };
