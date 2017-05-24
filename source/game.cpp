@@ -47,6 +47,10 @@ void game_main(std::string const& applicationPath)
 					{
 						playerOne.startMovingBackward();
 					}
+					if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0)
+					{
+						playerOne.startRotatingClockwise();
+					}
 					break;
 				case SDL_KEYUP:
 					if (event.key.keysym.sym == SDLK_w  && event.key.repeat == 0)
@@ -56,6 +60,10 @@ void game_main(std::string const& applicationPath)
 					if (event.key.keysym.sym == SDLK_s && event.key.repeat == 0)
 					{
 						playerOne.stopMovingBackward();
+					}
+					if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0)
+					{
+						playerOne.stopRotatingClockwise();
 					}
 					break;
 				default:
@@ -71,7 +79,8 @@ void game_main(std::string const& applicationPath)
 			tankLocation.w = 100;
 			tankLocation.h = 100;
 
-			SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture.getTexture(), nullptr, &tankLocation);
+			SDL_RenderCopyEx(sdlRenderer.getRenderer(), tankTexture.getTexture(),
+				nullptr, &tankLocation,playerOne.getRotation(),nullptr,SDL_FLIP_NONE);
 			sdlRenderer.present();
 		}
 
