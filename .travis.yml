@@ -1,4 +1,5 @@
 dist: trusty
+sudo: required
 
 # Enable C++ support
 language: cpp
@@ -7,4 +8,6 @@ compiler:
   - gcc
 # Build steps
 script:
+  - sudo apt-get update
+  - sudo apt-get install libsdl2-dev
   - ./travis-build.sh
