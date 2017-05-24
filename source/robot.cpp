@@ -37,6 +37,11 @@ void robot::startRotatingClockwise()
 	isClockwiseKeyDown = true;
 }
 
+void robot::startRotatingAnticlockwise()
+{
+	isAnticlockwiseKeyDown = true;
+}
+
 void robot::stopMovingForward()
 {
 	isForwardKeyDown = false;
@@ -50,6 +55,11 @@ void robot::stopMovingBackward()
 void robot::stopRotatingClockwise()
 {
 	isClockwiseKeyDown = false;
+}
+
+void robot::stopRotatingAnticlockwise()
+{
+	isAnticlockwiseKeyDown = false;
 }
 
 void robot::service()
@@ -75,6 +85,14 @@ void robot::service()
 		if (angle >= 360)
 		{
 			angle = angle - 360;
+		}
+	}
+	if (isAnticlockwiseKeyDown)
+	{
+		angle = angle - 1;
+		if (angle < 0)
+		{
+			angle = angle + 360;
 		}
 	}
 }

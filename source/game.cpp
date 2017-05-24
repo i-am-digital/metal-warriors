@@ -51,6 +51,10 @@ void game_main(std::string const& applicationPath)
 					{
 						playerOne.startRotatingClockwise();
 					}
+					if (event.key.keysym.sym == SDLK_a && event.key.repeat == 0)
+					{
+						playerOne.startRotatingAnticlockwise();
+					}
 					break;
 				case SDL_KEYUP:
 					if (event.key.keysym.sym == SDLK_w  && event.key.repeat == 0)
@@ -64,6 +68,10 @@ void game_main(std::string const& applicationPath)
 					if (event.key.keysym.sym == SDLK_d && event.key.repeat == 0)
 					{
 						playerOne.stopRotatingClockwise();
+					}
+					if (event.key.keysym.sym == SDLK_a && event.key.repeat == 0)
+					{
+						playerOne.stopRotatingAnticlockwise();
 					}
 					break;
 				default:

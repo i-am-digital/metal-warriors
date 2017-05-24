@@ -10,6 +10,7 @@ private:
 	bool isForwardKeyDown{ false };
 	bool isBackwardKeyDown{ false };
 	bool isClockwiseKeyDown{ false };
+	bool isAnticlockwiseKeyDown{ false };
 	bool moveForward();
 	bool moveBackward();
 	
@@ -21,9 +22,11 @@ public:
 	void startMovingForward();
 	void startMovingBackward();
 	void startRotatingClockwise();
+	void startRotatingAnticlockwise();
 	void stopMovingForward();
 	void stopMovingBackward();
 	void stopRotatingClockwise();
+	void stopRotatingAnticlockwise();
 	void service();
 
 
