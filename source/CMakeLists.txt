@@ -3,6 +3,7 @@ add_library(metal-source robot.cpp robot.h game.cpp game.h context.h window.h re
 if(${WIN32})
     target_include_directories(metal-source SYSTEM PRIVATE include)
     target_link_libraries(metal-source PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/x86/SDL2.lib)
+    file(COPY ${CMAKE_CURRENT_LIST_DIR}/lib/x86/SDL2.dll DESTINATION "${PROJECT_BINARY_DIR}/source")
 endif()
 
 if(${UNIX})
