@@ -43,6 +43,16 @@ public:
 	{
 		SDL_RenderPresent(renderer);
 	}
+
+	void setDrawingColour(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha = 0xFF)
+	{
+		SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+	}
+
+	void drawLine(int x1, int y1, int x2, int y2)
+	{
+		SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+	}
 };
 
 #endif

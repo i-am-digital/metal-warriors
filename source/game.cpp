@@ -8,6 +8,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <exception>
+#include <cmath>
 
 void game_main(std::string const& applicationPath)
 {
@@ -89,6 +90,13 @@ void game_main(std::string const& applicationPath)
 
 			SDL_RenderCopyEx(sdlRenderer.getRenderer(), tankTexture.getTexture(),
 				nullptr, &tankLocation,playerOne.getRotation(),nullptr,SDL_FLIP_NONE);
+
+			sdlRenderer.setDrawingColour(0xFF, 0x00, 0x00);
+			double radians = (playerOne.getRotation() * 2 * 3.142) / 360;
+			int x2 = playerOne.getX() + (80 * sin(radians));
+			int y2 = playerOne.getY() - (80 * cos(radians));
+			sdlRenderer.drawLine(playerOne.getX(), playerOne.getY(), x2, y2);
+
 			sdlRenderer.present();
 		}
 
