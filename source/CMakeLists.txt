@@ -1,4 +1,4 @@
-add_library(metal-source robot.cpp robot.h game.cpp game.h context.h window.h renderer.h surface.h texture.h)
+add_library(metal-source robot.cpp robot.h game.cpp game.h context.h window.h renderer.h surface.h texture.h bullet.h bullet.cpp)
 
 if(${WIN32})
     target_include_directories(metal-source SYSTEM PRIVATE include)
@@ -15,3 +15,4 @@ add_executable(metal-warriors main.cpp)
 target_link_libraries(metal-warriors metal-source)
 
 file(COPY images/tank-sprite.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")
+file(COPY images/bullet.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")

@@ -1,5 +1,6 @@
 #ifndef ROBOT_H
 #define ROBOT_H
+#include "bullet.h"
 
 class robot
 {
@@ -13,6 +14,7 @@ private:
 	bool isAnticlockwiseKeyDown{ false };
 	bool moveForward();
 	bool moveBackward();
+
 	
 
 public:
@@ -27,8 +29,9 @@ public:
 	void stopMovingBackward();
 	void stopRotatingClockwise();
 	void stopRotatingAnticlockwise();
+	void fire();
 	void service();
-
+	bullet playerBullet;
 
 
 };

@@ -4,6 +4,7 @@
 #include "renderer.h"
 #include "window.h"
 #include "game.h"
+#include "bullet.h"
 #include "context.h"
 #include <iostream>
 #include <SDL.h>
@@ -18,12 +19,15 @@ void game_main(std::string const& applicationPath)
 		Window sdlWindow;
 		Renderer sdlRenderer(sdlWindow);
 		Surface tankSurface("tank-sprite.bmp");
+		Surface bulletSurface("bullet.bmp");
 		Texture tankTexture(sdlRenderer, tankSurface);
+		Texture bulletTexture(sdlRenderer, bulletSurface);
 
 		std::cout << "Hello from game" << std::endl;
 
 
 		robot playerOne;
+		
 		bool isRunning = true;
 		while (isRunning)
 		{
@@ -56,6 +60,10 @@ void game_main(std::string const& applicationPath)
 					{
 						playerOne.startRotatingAnticlockwise();
 					}
+					if (event.key.keysym.sym == SDLK_f && event.key.repeat == 0)
+					{
+						playerOne.fire();
+					}
 					break;
 				case SDL_KEYUP:
 					if (event.key.keysym.sym == SDLK_w  && event.key.repeat == 0)
@@ -83,8 +91,8 @@ void game_main(std::string const& applicationPath)
 			sdlRenderer.clear();
 
 			SDL_Rect tankLocation;
-			tankLocation.x = playerOne.getX();
-			tankLocation.y = playerOne.getY();
+			tankLocation.x = playerOne.getX()-50;
+			tankLocation.y = playerOne.getY()-50;
 			tankLocation.w = 100;
 			tankLocation.h = 100;
 
@@ -97,7 +105,19 @@ void game_main(std::string const& applicationPath)
 			int y2 = playerOne.getY() - (80 * cos(radians));
 			sdlRenderer.drawLine(playerOne.getX(), playerOne.getY(), x2, y2);
 
+			if (playerOne.playerBullet.getDisplayed())
+			{
+				SDL_Rect bulletLocation;
+				bulletLocation.x = playerOne.playerBullet.getX() - 5;
+				bulletLocation.y = playerOne.playerBullet.getY() - 5;
+				bulletLocation.w = 10;
+				bulletLocation.h = 10;
+				SDL_RenderCopyEx(sdlRenderer.getRenderer(), bulletTexture.getTexture(),
+					nullptr, &bulletLocation, playerOne.playerBullet.getRotation(), nullptr, SDL_FLIP_NONE);
+
+			}
 			sdlRenderer.present();
+
 		}
 
 

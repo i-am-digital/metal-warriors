@@ -3,7 +3,6 @@
 
 bool robot::moveForward()
 {
-	
 	return false;
 }
 
@@ -62,8 +61,15 @@ void robot::stopRotatingAnticlockwise()
 	isAnticlockwiseKeyDown = false;
 }
 
+void robot::fire()
+{
+	playerBullet.fire(x, y, angle);
+}
+
 void robot::service()
 {
+	playerBullet.service();
+
 	if (isForwardKeyDown)
 	{
 		double radians = (angle * 2 * 3.142) / 360;
