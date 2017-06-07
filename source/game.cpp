@@ -95,6 +95,20 @@ void game_main(std::string const& applicationPath)
 			playerOne.service();
 			sdlRenderer.clear();
 
+			if (playerOne.playerBullet.getDisplayed())
+			{
+
+
+				SDL_Rect bulletLocation;
+				bulletLocation.x = playerOne.playerBullet.getX() - 5;
+				bulletLocation.y = playerOne.playerBullet.getY() - 5;
+				bulletLocation.w = 10;
+				bulletLocation.h = 10;
+				SDL_RenderCopyEx(sdlRenderer.getRenderer(), bulletTexture.getTexture(),
+					nullptr, &bulletLocation, playerOne.playerBullet.getRotation(), nullptr, SDL_FLIP_NONE);
+
+			}
+
 			SDL_Rect tankLocation;
 			tankLocation.x = playerOne.getX()-50;
 			tankLocation.y = playerOne.getY()-50;
@@ -116,25 +130,7 @@ void game_main(std::string const& applicationPath)
 					nullptr, &balloonLocation);
 			}
 
-			sdlRenderer.setDrawingColour(0xFF, 0x00, 0x00);
-			double radians = (playerOne.getRotation() * 2 * 3.142) / 360;
-			int x2 = playerOne.getX() + (80 * sin(radians));
-			int y2 = playerOne.getY() - (80 * cos(radians));
-			sdlRenderer.drawLine(playerOne.getX(), playerOne.getY(), x2, y2);
-
-			if (playerOne.playerBullet.getDisplayed())
-			{
-				
-
-				SDL_Rect bulletLocation;
-				bulletLocation.x = playerOne.playerBullet.getX() - 5;
-				bulletLocation.y = playerOne.playerBullet.getY() - 5;
-				bulletLocation.w = 10;
-				bulletLocation.h = 10;
-				SDL_RenderCopyEx(sdlRenderer.getRenderer(), bulletTexture.getTexture(),
-					nullptr, &bulletLocation, playerOne.playerBullet.getRotation(), nullptr, SDL_FLIP_NONE);
-
-			}
+	
 			sdlRenderer.present();
 
 		}
