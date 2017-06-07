@@ -21,8 +21,10 @@ void game_main(std::string const& applicationPath)
 		Renderer sdlRenderer(sdlWindow);
 		Surface tankSurface("tank-sprite.bmp");
 		Surface bulletSurface("bullet.bmp");
+		Surface balloonSurface("balloon.bmp");
 		Texture tankTexture(sdlRenderer, tankSurface);
 		Texture bulletTexture(sdlRenderer, bulletSurface);
+		Texture balloonTexture(sdlRenderer, balloonSurface);
 
 		std::cout << "Hello from game" << std::endl;
 
@@ -107,8 +109,11 @@ void game_main(std::string const& applicationPath)
 			SDL_RenderCopyEx(sdlRenderer.getRenderer(), tankTexture.getTexture(),
 				nullptr, &tankLocation,playerOne.getRotation(),nullptr,SDL_FLIP_NONE);
 
-			SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture.getTexture(),
-				nullptr, &balloonLocation);
+			if (balloon.getVisible())
+			{
+				SDL_RenderCopy(sdlRenderer.getRenderer(), balloonTexture.getTexture(),
+					nullptr, &balloonLocation);
+			}
 
 			sdlRenderer.setDrawingColour(0xFF, 0x00, 0x00);
 			double radians = (playerOne.getRotation() * 2 * 3.142) / 360;
@@ -118,6 +123,8 @@ void game_main(std::string const& applicationPath)
 
 			if (playerOne.playerBullet.getDisplayed())
 			{
+				balloon.hasBeenHit(playerOne.playerBullet.getX(), playerOne.playerBullet.getY());
+
 				SDL_Rect bulletLocation;
 				bulletLocation.x = playerOne.playerBullet.getX() - 5;
 				bulletLocation.y = playerOne.playerBullet.getY() - 5;

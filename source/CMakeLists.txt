@@ -16,3 +16,4 @@ target_link_libraries(metal-warriors metal-source)
 
 file(COPY images/tank-sprite.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")
 file(COPY images/bullet.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")
+file(COPY images/balloon.bmp DESTINATION "${PROJECT_BINARY_DIR}/source")

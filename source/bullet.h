@@ -21,7 +21,6 @@ public:
 	bool getDisplayed();
 	void fire(int x, int y, double angle);
 
-	
 
 
 };
