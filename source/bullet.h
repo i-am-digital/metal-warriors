@@ -9,6 +9,7 @@ private:
 	double y{ 200 };
 	double angle{ 25 };
 	bool isDisplayed{ false };
+	double speed{ 5 };
 
 
 

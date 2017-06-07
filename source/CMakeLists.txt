@@ -1,4 +1,4 @@
-add_library(metal-source robot.cpp robot.h game.cpp game.h context.h window.h renderer.h surface.h texture.h bullet.h bullet.cpp)
+add_library(metal-source robot.cpp robot.h game.cpp game.h context.h window.h renderer.h surface.h texture.h bullet.h bullet.cpp target.h target.cpp)
 
 if(${WIN32})
     target_include_directories(metal-source SYSTEM PRIVATE include)

@@ -1,3 +1,4 @@
+#include "target.h"
 #include "robot.h"
 #include "texture.h"
 #include "surface.h"
@@ -27,6 +28,7 @@ void game_main(std::string const& applicationPath)
 
 
 		robot playerOne;
+		target balloon;
 		
 		bool isRunning = true;
 		while (isRunning)
@@ -96,8 +98,17 @@ void game_main(std::string const& applicationPath)
 			tankLocation.w = 100;
 			tankLocation.h = 100;
 
+			SDL_Rect balloonLocation;
+			balloonLocation.x = balloon.getX() - 50;
+			balloonLocation.y = balloon.getY() - 50;
+			balloonLocation.w = 100;
+			balloonLocation.h = 100;
+
 			SDL_RenderCopyEx(sdlRenderer.getRenderer(), tankTexture.getTexture(),
 				nullptr, &tankLocation,playerOne.getRotation(),nullptr,SDL_FLIP_NONE);
+
+			SDL_RenderCopy(sdlRenderer.getRenderer(), tankTexture.getTexture(),
+				nullptr, &balloonLocation);
 
 			sdlRenderer.setDrawingColour(0xFF, 0x00, 0x00);
 			double radians = (playerOne.getRotation() * 2 * 3.142) / 360;

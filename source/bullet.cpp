@@ -18,8 +18,8 @@ void bullet::service()
 	if (isDisplayed)
 	{
 		double radians = (angle * 2 * 3.142) / 360;
-		x = x + sin(radians);
-		y = y - cos(radians);
+		x = x + sin(radians) * speed;
+		y = y - cos(radians) * speed;
 	}
 }
 
