@@ -31,7 +31,8 @@ void game_main(std::string const& applicationPath)
 
 		robot playerOne;
 		target balloon;
-		
+		playerOne.playerBullet.setTarget(&balloon);
+
 		bool isRunning = true;
 		while (isRunning)
 		{
@@ -123,7 +124,7 @@ void game_main(std::string const& applicationPath)
 
 			if (playerOne.playerBullet.getDisplayed())
 			{
-				balloon.hasBeenHit(playerOne.playerBullet.getX(), playerOne.playerBullet.getY());
+				
 
 				SDL_Rect bulletLocation;
 				bulletLocation.x = playerOne.playerBullet.getX() - 5;

@@ -1,6 +1,6 @@
 #ifndef BULLET_H
 #define BULLET_H
-
+#include "target.h"
 class bullet
 {
 
@@ -10,6 +10,7 @@ private:
 	double angle{ 25 };
 	bool isDisplayed{ false };
 	double speed{ 5 };
+	target* balloon{ nullptr };
 
 
 
@@ -20,7 +21,7 @@ public:
 	void service();
 	bool getDisplayed();
 	void fire(int x, int y, double angle);
-
+	void setTarget(target* balloon);
 
 
 };

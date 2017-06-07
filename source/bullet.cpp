@@ -20,6 +20,12 @@ void bullet::service()
 		double radians = (angle * 2 * 3.142) / 360;
 		x = x + sin(radians) * speed;
 		y = y - cos(radians) * speed;
+
+		if (balloon != nullptr && balloon->hasBeenHit(getX(), getY()))
+		{
+			isDisplayed = false;
+		}
+		
 	}
 }
 
@@ -35,5 +41,10 @@ void bullet::fire(int x, int y, double angle)
 	this->angle = angle;
 
 	isDisplayed = true;
+}
+
+void bullet::setTarget(target* balloon)
+{
+	this->balloon = balloon;
 }
 
